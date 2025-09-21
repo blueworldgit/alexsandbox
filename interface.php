@@ -401,6 +401,29 @@ $('#response').html(data);
 	})
 	})
 	
+	// Language switch button handler - same pattern as verse button
+	$('#language_switch').click(function(e){
+		e.preventDefault();
+		
+		$('#response').html("<img src='./ajax-loader.gif'>");
+		
+		// Get current verse position to maintain it after language switch
+		keyid = Cookies.get('versepos');
+		system = $("#system").val();
+		
+		$.ajax({
+			type: 'POST',
+			url: './switch_language.php',
+			data: { keyid: keyid, system: system } // pass current verse and system
+		})
+		.done(function(data){
+			$("#response").css("display", "none");
+			// show the response
+			$('#response').html(data);
+			$('#response').fadeIn(2000);
+		})
+	})
+	
 	$("#system").change(function(){
 
 
@@ -440,6 +463,12 @@ keyid=Cookies.get('versepos');
 system=$("#system").val();
 db_type='<?php echo $_SESSION['db_type']; ?>';
 
+console.log('PREVIOUS BUTTON DEBUG:');
+console.log('keyid:', keyid);
+console.log('system:', system);
+console.log('db_type:', db_type);
+console.log('Session db_type from PHP:', '<?php echo $_SESSION['db_type']; ?>');
+
 $.ajax({
 type: 'POST',
 url: './bookchapterverseprevious.php',
@@ -470,8 +499,11 @@ keyid=Cookies.get('versepos');
 system=$("#system").val();
 db_type='<?php echo $_SESSION['db_type']; ?>';
 
-
-
+console.log('NEXT BUTTON DEBUG:');
+console.log('keyid:', keyid);
+console.log('system:', system);
+console.log('db_type:', db_type);
+console.log('Session db_type from PHP:', '<?php echo $_SESSION['db_type']; ?>');
 
 $.ajax({
 type: 'POST',
@@ -1166,13 +1198,11 @@ a {
    
      
    
-	 <a href="?toggle_db=1" class="toggle-button">
-	<button name="strongbtn" id="strongbtn" class="btn btn-primary col-md-6" style="    background-color: #3f111c;
+	<button name="language_switch" id="language_switch" class="btn btn-primary col-md-6" style="    background-color: #3f111c;
     color: #dedede;
     border-width: 1px;
     border-color: #ffffff;     width: 100%;
     margin-bottom: 12px;" fdprocessedid="5tcvor">Switch to <?php echo ($_SESSION['db_type'] == 'english') ? 'Hebrew/Greek' : 'English (KJV)'; ?> Database</button>
-	 </a>
 	
 </div>
 
