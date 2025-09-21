@@ -1,0 +1,150 @@
+🔍 Database Comparison Analysis
+Hebrew/Greek Database vs English KJV Database
+Analysis Date: 2025-09-21 11:13:06
+
+📊 Database Overview Comparison
+🗄️ Hebrew/Greek Original Language Database
+Database: u826402471_gem
+Tables: 48
+Total Size: 810.47 MB
+🗄️ English KJV Bible Database
+Database: u826402471_gem_kjv
+Tables: 25
+Total Size: 715.8 MB
+🔢 Gematria Calculation Systems Comparison
+Gematria System	Hebrew/Greek DB	English KJV DB	Notes
+Standard Gematria
+theholybible	✓ Present	✓ Present	✓ Available in both databases
+Ordinal Gematria
+theholybibleordinal	✓ Present	✓ Present	✓ Available in both databases
+Reduced Gematria
+theholybiblereduced	✓ Present	✓ Present	✓ Available in both databases
+Full Standard Gematria
+theholybiblefullstandard	✓ Present	✗ Absent	🔹 Hebrew/Greek Only - Advanced original language calculations
+Full Ordinal Gematria
+theholybiblefullordinal	✓ Present	✗ Absent	🔹 Hebrew/Greek Only - Advanced original language calculations
+Full Reduced Gematria
+theholybiblefullreduced	✓ Present	✗ Absent	🔹 Hebrew/Greek Only - Advanced original language calculations
+Reverse Standard Gematria
+theholybiblereversedstandard	✓ Present	✓ Present	✓ Available in both databases
+Reverse Ordinal Gematria
+theholybiblereversedordinal	✓ Present	✓ Present	✓ Available in both databases
+Reverse Reduced Gematria
+theholybiblereversedreduced	✓ Present	✓ Present	✓ Available in both databases
+Combined Method One (Ord + Std)
+theholybibleone	✓ Present	✗ Absent	🔹 Hebrew/Greek Only - Advanced original language calculations
+Combined Method Two (Red + Ord + Std)
+theholybibletwo	✓ Present	✗ Absent	🔹 Hebrew/Greek Only - Advanced original language calculations
+Combined Method Three (Full Ord + Full Std)
+theholybiblethree	✓ Present	✗ Absent	🔹 Hebrew/Greek Only - Advanced original language calculations
+Combined Method Four (Full Red + Full Ord + Full Std)
+theholybiblefour	✓ Present	✗ Absent	🔹 Hebrew/Greek Only - Advanced original language calculations
+Combined Method Five (Rev Ord + Rev Std)
+theholybiblefive	✓ Present	✗ Absent	🔹 Hebrew/Greek Only - Advanced original language calculations
+Combined Method Six (Rev Red + Rev Ord + Rev Std)
+theholybiblesix	✓ Present	✗ Absent	🔹 Hebrew/Greek Only - Advanced original language calculations
+Ordinal + Standard Combined
+theholybibleordinalstandard	✗ Absent	✓ Present	🔹 English Only - KJV-specific calculations
+Reduced + Ordinal + Standard Combined
+theholybiblereducedordinalstandard	✗ Absent	✓ Present	🔹 English Only - KJV-specific calculations
+🧮 Methods Tables Comparison
+Methods System	Hebrew/Greek DB	English KJV DB	Analysis
+Standard Methods
+methods_standard	✓ Present	✓ Present	Available in both - Cross-language comparison possible
+Ordinal Methods
+methods_ordinal	✓ Present	✓ Present	Available in both - Cross-language comparison possible
+Reduced Methods
+methods_reduced	✓ Present	✓ Present	Available in both - Cross-language comparison possible
+Full Standard Methods
+methods_fullstandard	✓ Present	✗ Absent	Hebrew/Greek exclusive - Original language method analysis
+Full Ordinal Methods
+methods_fullordinal	✓ Present	✗ Absent	Hebrew/Greek exclusive - Original language method analysis
+Full Reduced Methods
+methods_fullreduced	✓ Present	✗ Absent	Hebrew/Greek exclusive - Original language method analysis
+Reverse Standard Methods
+methods_reversedstandard	✓ Present	✓ Present	Available in both - Cross-language comparison possible
+Reverse Ordinal Methods
+methods_reversedordinal	✓ Present	✓ Present	Available in both - Cross-language comparison possible
+Reverse Reduced Methods
+methods_reversedreduced	✓ Present	✓ Present	Available in both - Cross-language comparison possible
+Combined Methods One
+methods_one	✓ Present	✓ Present	Available in both - Cross-language comparison possible
+Combined Methods Two
+methods_two	✓ Present	✓ Present	Available in both - Cross-language comparison possible
+Combined Methods Three
+methods_three	✓ Present	✗ Absent	Hebrew/Greek exclusive - Original language method analysis
+Combined Methods Four
+methods_four	✓ Present	✗ Absent	Hebrew/Greek exclusive - Original language method analysis
+Combined Methods Five
+methods_five	✓ Present	✓ Present	Available in both - Cross-language comparison possible
+Combined Methods Six
+methods_six	✓ Present	✓ Present	Available in both - Cross-language comparison possible
+🔍 Unique Tables Analysis
+📚 Hebrew/Greek Exclusive Tables (25)
+bible_en_verses
+differences
+kjv_theholybible
+matthew_errors
+methods_four
+methods_fullordinal
+methods_fullreduced
+methods_fullstandard
+methods_three
+six
+systems
+theholybibleaccented
+theholybibledeaccented
+theholybibledeaccentedwords
+theholybiblefive
+theholybiblefour
+theholybiblefullordinal
+theholybiblefullreduced
+theholybiblefullstandard
+theholybibleone
+theholybiblesix
+theholybiblethree
+theholybibletranslated
+theholybibletwo
+thenewstuff
+📖 English KJV Exclusive Tables (2)
+theholybibleordinalstandard
+theholybiblereducedordinalstandard
+🤝 Common Tables (23)
+Tables present in both databases:
+
+books
+count
+methods_five
+methods_one
+methods_ordinal
+methods_reduced
+methods_reversedordinal
+methods_reversedreduced
+methods_reversedstandard
+methods_six
+methods_standard
+methods_two
+strong_numbers
+strong_words
+strongsconcord
+theholybible
+theholybibleordinal
+theholybiblereduced
+theholybiblereversedordinal
+theholybiblereversedreduced
+theholybiblereversedstandard
+ultracalcs
+versemap
+📋 Key Differences Summary
+🔹 Hebrew/Greek Database Features:
+Full Methods: Contains 'Full' variations of gematria calculations not present in English
+Extended Combinations: Methods Three and Four for complex original language analysis
+Original Language Focus: Optimized for Hebrew and Greek textual analysis
+🔹 English KJV Database Features:
+Standard Systems: Focus on core gematria calculation methods
+English Optimization: Tailored for English language biblical text analysis
+Streamlined Approach: Fewer method variations for cleaner English analysis
+🎯 Strategic Implementation:
+Language-Specific Optimization: Each database optimized for its target language
+Computational Efficiency: Avoids unnecessary calculations for language-inappropriate methods
+Research Flexibility: Allows comparative analysis between original and translated texts
