@@ -18,14 +18,14 @@ if (mysqli_connect_errno())
 // config.php - Store database connection parameters
 $databases = [
     'english' => [
-        'host' => 'localhost',
+        'host' => 'srv1015.hstgr.io',
         'username' => 'u826402471_u826402471_blu',
         'password' => 'Neris@9112512',
         'database' => 'u826402471_gem_kjv',
         'table_prefix' => 'kjv_'
     ],
     'hebrew_greek' => [
-        'host' => 'localhost',
+        'host' => 'srv1015.hstgr.io',
         'username' => 'u826402471_blue',
         'password' => 'letmein123',
         'database' => 'u826402471_gem',
@@ -47,9 +47,10 @@ if (!isset($_SESSION['db_type'])) {
 if (isset($_GET['toggle_db'])) {
     $_SESSION['db_type'] = ($_SESSION['db_type'] == 'english') ? 'hebrew_greek' : 'english';
     
-    // Redirect to remove the toggle parameter from URL
+    // Redirect back to the same page keeping the current verse position
     $redirect_url = strtok($_SERVER['REQUEST_URI'], '?');
-    header("Location: $redirect_url");
+    $verse = isset($_COOKIE['versepos']) ? (int)$_COOKIE['versepos'] : 1;
+    header("Location: $redirect_url?verse=" . $verse);
     exit();
 }
 

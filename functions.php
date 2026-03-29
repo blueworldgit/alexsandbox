@@ -274,10 +274,7 @@ function getbookname($conn,$booknumber)
 	
 	$row = mysqli_fetch_array($query);
 	
-	
-
-		
-	
+	if (!$row) { return ''; }
 	
 	$name=$row['book'];
 	

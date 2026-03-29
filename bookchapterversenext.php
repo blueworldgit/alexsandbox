@@ -103,6 +103,7 @@ $versewords=getversewords($conn,$keyvalue)
 
   
         <div class="row">
+<?php if ($_SESSION['db_type'] != 'english') { ?>
 		  <div class="col-md-8">
 	<p style="text-align:center; color:#ffffff;"><?php echo $bookname. " ".$chapter.":".$verse;?><?php echo $versewords;?></p>
 <table  class="table table-striped" style="
@@ -167,9 +168,11 @@ $number=$row['numbers'];
 ?>
 </tbody>
 </table>
-</div><!--md-6-->
-        <div class="row">
-		  <div class="col-md-4">
+</div><!--md-8-->
+<div class="col-md-4">
+<?php } else { ?>
+<div class="col-md-12">
+<?php } ?>
 		  
 		  
 		  <p style="text-align:center; color:#ffffff;font-size: 15px;">Verse# = <?php echo $keyvalue;?>	&nbsp;	&nbsp; Words = <?php echo $no_words;?>	&nbsp;	&nbsp; Letters =  <?php echo $no_letters;?></p>	
@@ -239,7 +242,8 @@ $total=$row['gematriaverse'];
 </tr>
 </tbody>
 </table>
-</div><!--md-4-->
+</div><!--col-->
+</div><!--row-->
 
 <div class="row">
 		  <div class="col-md-12">
@@ -278,35 +282,74 @@ $fw_lw_cw=$row['FLCW'];
 $f2lw=$row['2_FLW'];
 $cw34=$row['3/4_CW'];
 $f2lw_34=$row['2_FLW_+_3/4_CW'];
+$f3lw_78=$row['3 FLW + 7/8 CW'];
 $cl34=$row['3/4_CL'];
 $f2ll_34=$row['2_FLL_+_3/4_CL'];
 $surrcw=$row['W_surr_CW'];
 $W_upto_CW=$row['W_upto_CW'];
 $W_from_CW=$row['W_from_CW'];
-
-
-?>	
+$w2surrcw=$row['2_W_surr_CW'];
+$f3lw=$row['3_FLW'];
+$cw78=$row['7/8_CW'];
+$w3surrcw=$row['3_W_surr_CW'];
+$threefll=$row['3_FLL'];
+$f3ll_78=$row['3_FLL_+_7/8_CL'];
+$cl78=$row['7/8_CL'];
+?>
 		  <div class="row">
-
 <div class="col-md-12">
 
-<p style="text-align: center; margin-bottom: 1px;font-size: 15px; color: #bcbdc0;"> <span style="color:#d1d2d4;    font-size: 15px;">FLL = <?php echo $fll;?></span>&nbsp;---&nbsp;<span style="color:#ec0176;    font-size: 15px;">CL = <?php echo $cl;?></span>&nbsp;---&nbsp;<span style="color:#f78c17;    font-size: 15px;">FLCL = <?php echo $flcl;?> </span></p>
-
-
-<p style="text-align: center; margin-bottom: 1px;font-size: 15px; color: #bcbdc0;"> <span style="color:#d1d2d4;    font-size: 15px;">2 FLL = <?php echo $twofll;?></span>&nbsp;---&nbsp;<span style="color:#ec0176;    font-size: 15px;">3/4 CL = <?php echo $cl34;?></span>&nbsp;---&nbsp;<span style="color:#f78c17;    font-size: 15px;">2 FLL + 3/4 CL = <?php echo $f2ll_34;?> </span></p>
-
-<p style="text-align: center; margin-bottom: 1px;font-size: 15px; color: #bcbdc0;"> <span style="color:#ffffff;    font-size: 15px;">FLW = <?php echo $fw_lw;?></span>&nbsp;---&nbsp;<span style="color:#ef3d42;    font-size: 15px;">CW = <?php echo $cw;?></span>&nbsp;---&nbsp;<span style="color:#e2d031;    font-size: 15px;">FLCW = <?php echo $fw_lw_cw;?></span>&nbsp;---&nbsp;<span style="color:#9a73b3;    font-size: 15px;">W. surr. CW = <?php echo $surrcw;?></span> </p>
-
-<p style="text-align: center; margin-bottom: 1px;font-size: 15px; color: #bcbdc0;"> <span style="color:#ffffff;    font-size: 15px;">2 FLW = <?php echo $f2lw;?></span>&nbsp;---&nbsp;<span style="color:#ef3d42;    font-size: 15px;">3/4 CW = <?php echo $cw34;?></span>&nbsp;---&nbsp;<span style="color:#e2d031;    font-size: 15px;    "><?php if ($no_words>4) { echo "2 FLW + 3/4 CW = $f2lw_34";} ?></span> </p>
-
-<p style="text-align: center; margin-bottom: 1px;font-size: 15px; color: #bcbdc0;"> <span style="color:#ef3d42;    font-size: 15px;">W. up to CW = <?php echo $W_upto_CW;?></span>&nbsp;---&nbsp;<span style="color:#ef3d42;    font-size: 15px;">W. from CW = <?php echo $W_from_CW;?></span></p>
-
- <?php  if (isset($ultraresult)) { ?>
-<p style="text-align: center; margin-bottom: 1px;font-size: 15px;"> <span style="color:#afafaf;"> ultra calculation =</span><span style="color:#e2d031;    font-size: 15px;"> <?php echo $ultraresult;?></span></p>
-
-
- <?php } ?>
-
+			<p style="text-align: center; margin-bottom: 1px; font-size: 15px; color: #bcbdc0;">
+				<span style="color:#d1d2d4;">FLL = <?php echo $fll; ?></span>&nbsp;---&nbsp;
+				<span style="color:#ec0176;">CL = <?php echo $cl; ?></span>&nbsp;---&nbsp;
+				<span style="color:#f78c17;">FLCL = <?php echo $flcl; ?></span>
+			</p>
+			<p style="text-align: center; margin-bottom: 1px; font-size: 15px; color: #bcbdc0;">
+				<span style="color:#d1d2d4;">2 FLL = <?php echo $twofll; ?></span>&nbsp;---&nbsp;
+				<span style="color:#ec0176;">3/4 CL = <?php echo $cl34; ?></span>&nbsp;---&nbsp;
+				<span style="color:#f78c17;">2 FLL + 3/4 CL = <?php echo $f2ll_34; ?></span>
+			</p>
+			<p style="text-align: center; margin-bottom: 1px; font-size: 15px; color: #bcbdc0;">
+				<span style="color:#d1d2d4;">3 FLL = <?php echo $threefll; ?></span>&nbsp;---&nbsp;
+				<span style="color:#ec0176;">7/8 CL = <?php echo $cl78; ?></span>&nbsp;---&nbsp;
+				<span style="color:#f78c17;">3 FLL + 7/8 CL = <?php echo $f3ll_78; ?></span>
+			</p>
+			<?php
+			$line4 = [];
+			if (!empty($fw_lw)) $line4[] = '<span style="color:#ffffff;">FLW = ' . $fw_lw . '</span>';
+			if (!empty($cw)) $line4[] = '<span style="color:#ef3d42;">CW = ' . $cw . '</span>';
+			if (!empty($fw_lw_cw)) $line4[] = '<span style="color:#e2d031;">FLCW = ' . $fw_lw_cw . '</span>';
+			if (!empty($surrcw)) $line4[] = '<span style="color:#9a73b3;">W. surr. CW = ' . $surrcw . '</span>';
+			?>
+			<p style="text-align: center; margin-bottom: 1px; font-size: 15px; color: #bcbdc0;"><?php echo implode('&nbsp;---&nbsp;', $line4); ?></p>
+			<?php
+			$line5 = [];
+			if (!empty($f2lw)) $line5[] = '<span style="color:#ffffff;">2 FLW = ' . $f2lw . '</span>';
+			if (!empty($cw34)) $line5[] = '<span style="color:#ef3d42;">3/4 CW = ' . $cw34 . '</span>';
+			if ($no_words > 4 && !empty($f2lw_34)) $line5[] = '<span style="color:#e2d031;">2 FLW + 3/4 CW = ' . $f2lw_34 . '</span>';
+			if ($no_words > 4 && !empty($w2surrcw)) $line5[] = '<span style="color:#9a73b3;">2 W. surr. CW = ' . $w2surrcw . '</span>';
+			?>
+			<p style="text-align: center; margin-bottom: 1px; font-size: 15px; color: #bcbdc0;"><?php echo implode('&nbsp;---&nbsp;', $line5); ?></p>
+			<?php
+			$line6 = [];
+			if ($no_words >= 7 && !empty($f3lw)) $line6[] = '<span style="color:#ffffff;">3 FLW = ' . $f3lw . '</span>';
+			if ($no_words >= 7 && !empty($cw78)) $line6[] = '<span style="color:#ef3d42;">7/8 CW = ' . $cw78 . '</span>';
+			if ($no_words >= 7 && !empty($f3lw_78)) $line6[] = '<span style="color:#e2d031;">3 FLW + 7/8 CW = ' . $f3lw_78 . '</span>';
+			if ($no_words >= 7 && !empty($w3surrcw)) $line6[] = '<span style="color:#9a73b3;">3 W. surr. CW = ' . $w3surrcw . '</span>';
+			?>
+			<p style="text-align: center; margin-bottom: 1px; font-size: 15px; color: #bcbdc0;"><?php echo implode('&nbsp;---&nbsp;', $line6); ?></p>
+			<?php
+			$line7 = [];
+			if (!empty($W_upto_CW)) $line7[] = '<span style="color:#ef3d42;">W. up to CW = ' . $W_upto_CW . '</span>';
+			if (!empty($W_from_CW)) $line7[] = '<span style="color:#ef3d42;">W. from CW = ' . $W_from_CW . '</span>';
+			?>
+			<p style="text-align: center; margin-bottom: 1px; font-size: 15px; color: #bcbdc0;"><?php echo implode('&nbsp;---&nbsp;', $line7); ?></p>
+			<?php if (isset($ultraresult)) { ?>
+			<p style="text-align: center; margin-bottom: 1px;font-size: 15px;">
+				<span style="color:#afafaf;"> ultra calculation =</span>
+				<span style="color:#e2d031; font-size: 15px;"> <?php echo $ultraresult;?></span>
+			</p>
+			<?php } ?>
 
 </div>
   </div><!--row-->
