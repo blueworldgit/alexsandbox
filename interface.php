@@ -1166,11 +1166,11 @@ a {
      
    
 	 <a href="?toggle_db=1" class="toggle-button">
-	<button name="strongbtn" id="strongbtn" class="btn btn-primary col-md-6" style="    background-color: #3f111c;
+	<button name="toggledbtn" id="toggledbtn" class="btn btn-primary col-md-6" style="    background-color: #3f111c;
     color: #dedede;
     border-width: 1px;
     border-color: #ffffff;     width: 100%;
-    margin-bottom: 12px;" fdprocessedid="5tcvor">Switch to <?php echo ($_SESSION['db_type'] == 'english') ? 'Hebrew/Greek' : 'English (KJV)'; ?> Database</button>
+    margin-bottom: 12px;">Switch to <?php echo ($_SESSION['db_type'] == 'english') ? 'Hebrew/Greek' : 'English (KJV)'; ?> Database</button>
 	 </a>
 	
 </div>
