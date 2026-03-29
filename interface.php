@@ -1030,6 +1030,7 @@ a {
 
 <div class="col-md-12">
 
+<?php if ($_SESSION['db_type'] != 'english') { ?>
 <p style="
    text-align: center;
     font-size: 16px;
@@ -1063,6 +1064,7 @@ a {
 
 </div> <!--row-->
 </div> <!--md-12-->
+<?php } ?>
 
 
 
