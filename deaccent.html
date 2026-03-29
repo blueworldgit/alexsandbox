@@ -1,0 +1,295 @@
+<html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.js "></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js "></script>
+<script>
+$(document).ready(function(){
+
+    load_data();  
+      function load_data(page)  
+      {  
+         alert("hello"); 
+           
+      } 
+$('#inputform').submit(function(){
+event.preventDefault();
+
+$('#response').html("<img src='./15.gif'>");
+var language=$('#language').val();
+ //alert(language);
+
+
+ if(language==1) {
+$.ajax({
+type: 'POST',
+url: 'output.php',
+data: $(this).serialize() // getting filed value in serialize form
+})
+
+
+.done(function(data){ // if getting done then call.
+
+ /*$('#output').DataTable( {
+        "scrollX": true
+		//"paging": false,
+		//"searching": false
+    } );
+	*/
+	
+	 $(document).ready(function() {
+ $('#output').DataTable( {
+			"scrollX": true,
+			"paging": false,
+		"searching": false,
+		"ordering": false
+        } );
+    } );
+
+//$('#response').hide();
+
+$("#response").css("display", "none");
+// show the response
+$('#response').html(data);
+
+ $('#response').fadeIn(2000);
+
+})
+
+
+.fail(function() { // if fail then getting message
+
+// just in case posting your form failed
+alert( "Posting failed." );
+
+});
+
+// to prevent refreshing the whole page page
+return false;
+
+}
+
+else if(language==2) { 
+
+
+$.ajax({
+type: 'POST',
+url: 'hebrew.php',
+data: $(this).serialize() // getting filed value in serialize form
+})
+
+
+.done(function(data){ // if getting done then call.
+
+ /*$('#output').DataTable( {
+        "scrollX": true
+		//"paging": false,
+		//"searching": false
+    } );
+	*/
+	
+	 $(document).ready(function() {
+ $('#output').DataTable( {
+			"scrollX": true,
+			"paging": false,
+		"searching": false,
+		"ordering": false
+        } );
+    } );
+
+//$('#response').hide();
+
+$("#response").css("display", "none");
+// show the response
+$('#response').html(data);
+
+ $('#response').fadeIn(2000);
+
+})
+
+
+.fail(function() { // if fail then getting message
+
+// just in case posting your form failed
+alert( "Posting failed." );
+
+});
+
+// to prevent refreshing the whole page page
+return false;
+
+
+
+  }
+  
+  
+  else if(language==3) { 
+
+
+$.ajax({
+type: 'POST',
+url: 'greek.php',
+data: $(this).serialize() // getting filed value in serialize form
+})
+
+
+.done(function(data){ // if getting done then call.
+
+ /*$('#output').DataTable( {
+        "scrollX": true
+		//"paging": false,
+		//"searching": false
+    } );
+	*/
+	
+	 $(document).ready(function() {
+ $('#output').DataTable( {
+			"scrollX": true,
+			"paging": false,
+		"searching": false,
+		"ordering": false
+        } );
+    } );
+
+//$('#response').hide();
+
+$("#response").css("display", "none");
+// show the response
+$('#response').html(data);
+
+ $('#response').fadeIn(2000);
+
+})
+
+
+.fail(function() { // if fail then getting message
+
+// just in case posting your form failed
+alert( "Posting failed." );
+
+});
+
+// to prevent refreshing the whole page page
+return false;
+
+}
+
+});
+});
+</script>
+
+<style>
+table, th, td {
+  border: 1px solid white;
+  text-align: center;
+  vertical-align: middle;
+  padding:12px;
+}
+
+table {
+  /*table-layout: fixed ;*/
+  width: 100% ;
+}
+td {
+ 
+  
+}
+
+th {
+font-size: 25px;
+  
+}
+
+
+
+.red {
+color:  #F8931C;
+}
+
+
+.blue {
+color: #00AEEF;
+}
+
+.green {
+
+color: #39B54A;
+}
+
+.caption {
+    font-size: 11px;
+
+}
+
+
+.captiondigits {
+font-size: 16px;
+
+}
+
+.sumtitle {
+    font-size: 20px;
+    color: #ff4c4c;
+
+}
+
+div.dataTables_wrapper {
+        width: 90%;
+        margin: 0 auto;
+    }
+	
+	
+	th, td { white-space: nowrap; }
+	
+	
+	.dataTables_info {
+	
+	display:none;
+	}
+
+</style>
+<body style="background-color:#000000; color:#ffffff;">
+<div class="col-md-12">
+<form id="inputform" accept-charset="UTF-8" class="form-horizontal" style="padding-top:25px;">
+<fieldset>
+
+<!-- Form Name -->
+
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for=""></label>  
+  <div class="col-md-5">
+  <input id="text" name="text" type="text" placeholder="Enter text and select a language" class="form-control input-md">
+    
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="language"></label>
+  <div class="col-md-5">
+    <select id="language" name="language" class="form-control">
+  
+      <option value="2">Hebrew</option>
+      <option value="3">Greek</option>
+    </select>
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="singlebutton"></label>
+  <div class="col-md-4">
+    <button id="submit" name="submit" class="btn btn-primary">Submit</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+
+</div>
+<div class="col-md-12">
+
+<div id="response"></div>
+</div>
+</body>
+</html>

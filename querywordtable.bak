@@ -1,0 +1,339 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.js "></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<style>
+body {
+  background-color: black;
+  padding-top: 25px;
+}
+
+.table-striped>tbody>tr:nth-child(odd)>td, 
+.table-striped>tbody>tr:nth-child(odd)>th {
+   background-color: #000000; // Choose your own color here
+ }
+ 
+ 
+ .table-striped>tbody>tr:nth-child(even)>td, 
+.table-striped>tbody>tr:nth-child(even)>th {
+   background-color: #000000; // Choose your own color here
+ }
+</style>
+</head>
+<body>
+<div class="container">
+<?php
+include("./functions.php");
+
+$number=$_POST['versetotal'];
+
+$systems=$_POST['system'];
+
+
+
+$duplicateword=$_POST['duplicateword'];
+
+
+
+$versesum=0;
+
+
+
+$systemvalues=explode("#",$systems);
+
+$bibletable=$systemvalues[0];
+$methodtable=$systemvalues[1];
+//SELECT * FROM strong_words, strong_numbers WHERE strong_words.keyid = strong_numbers.keyid AND strong_numbers.keyid=2 AND strong_words.orderid=strong_numbers.orderid ORDER BY strong_numbers.orderid
+
+
+//SELECT * FROM strong_words, strong_numbers, strongsconcord WHERE strong_words.keyid = strong_numbers.keyid AND strong_numbers.keyid=1 AND strong_words.orderid=strong_numbers.orderid AND strong_numbers.numbers=strongsconcord.number ORDER BY strong_numbers.orderid
+
+
+
+
+
+//SELECT * FROM verses ORDER BY `book_number` ASC, `chapter` ASC,`verse` ASC
+
+
+
+
+
+if($duplicateword==="allow") {
+
+//the query
+//SELECT * FROM `theholybible` WHERE `gematriaword` = 401
+
+$query = mysqli_query($conn, "SELECT * FROM `{$bibletable}` WHERE `gematriaword` = '{$number}'"); }
+
+else {$query = mysqli_query($conn, "SELECT * FROM `{$bibletable}` WHERE `gematriaword` = '{$number}' group by `word` ");}
+
+
+	//mysqli_query($conn, $query);
+	
+
+
+		
+
+
+$header=str_replace("methods_","",$methodtable);
+
+if($header=="one") {$header="ord + sta";}
+if($header=="two") {$header="red + ord + sta";}
+if($header=="three") {$header="Full ord + Full sta";}
+if($header=="four") {$header="Full red + Full ord + Full sta";}
+if($header=="five") {$header="rev ord + rev sta";}
+if($header=="six") {$header="rev red + rev ord + rev sta";}
+
+$header = str_replace("sed", "se&nbsp;", $header); //very ugly but cannot rename tables at this stage
+
+
+?>
+
+
+  <div class="row">
+		  <div class="col-md-12">
+	<h3 style="
+    text-align: center;
+    font-size: 18px;
+    color: #b7a5a5;;
+
+	
+		
+	
+"> <?php echo $header." "."system";?> </h3>
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+  <div class="row">
+		  <div class="col-md-12">
+	<p style="
+    text-align: center;
+    font-size: 12px;
+    color: #ffa500;
+	
+	
+">  </p>
+
+</div>
+</div>
+
+        <div class="row">
+		  <div class="col-md-6">
+	
+<table  class="table table-striped" style="
+    width: 100%;
+"> 
+<thead style="
+    background-color: #FFA500;
+"> 
+
+<tr>
+  <td>No</td>
+  <td>Word</td>
+  <td>Book</td>
+  <td>Translation</td>
+  <td>Verse #</td>
+
+
+ 
+</tr>
+</thead>
+<tbody>
+
+
+<?php
+	
+	$counter=0;
+	$bookcount=0;
+	$versecount=0;
+	$chaptercount=0;
+	$booksum=0;
+$chaptersum=0;
+$versesum=0;
+	
+	
+	$rows = mysqli_num_rows($query);
+
+
+
+		while( $row = mysqli_fetch_array( $query)){
+        $counter++;
+        $verseno=$row['keyid'];
+		
+		
+		if(($rows > 1) && ($duplicateword==="allow") ) { 
+		
+	$resultarray=getbookchapterverse($conn,$verseno);
+
+$booksum=($resultarray[0]+$booksum)*1;
+$chaptersum=($resultarray[1]+$chaptersum)*1;
+$versesum=($resultarray[2]+$versesum)*1;
+
+
+}
+			
+						$book=$row['book'];
+$chapter=$row['chapter'];
+$versenumber=$row['verse'];
+$wordorder=$row['wordorder'];
+$translation=gettranslation($conn,$book,$chapter,$versenumber,$wordorder);
+	
+	echo "<tr>";
+		
+	
+	
+	?>
+
+	
+
+       <td style="color:#ffffff;"><?php echo $counter."."; ?></td>
+     <td style="color:#ffffff;"><?php echo $row['word']; ?></td>
+
+	    <td style="color:#ffffff;"><?php echo $row['book']; ?></td>
+		
+		 <td style="color:#ffffff;"><?php echo $translation; ?></td>
+		
+		    <td style="color:#ffffff;"><a href="./interface.php?verse=<?php echo $verseno; ?>&systems=<?php echo $systems; ?>"target="_blank"><?php echo $verseno; ?></a></td>
+	
+
+
+   </tr>
+   
+
+<?php }
+
+
+?>
+</tbody>
+</table>
+
+<?php if(($rows > 1) && ($duplicateword==="allow") ) { ?>
+
+<p style="text-align: center; margin-top: -8px;font-size: 15px; color:#afafaf;">Sum book# = <span style="color:#e2d031;    font-size: 15px;"> <?php echo $booksum;?></span></p>
+<p style="text-align: center; margin-top: -8px;font-size: 15px; color:#afafaf;">Sum chapter# = <span style="color:#e2d031;    font-size: 15px;"> <?php echo $chaptersum;?></span></p>
+<p style="text-align: center; margin-top: -8px;font-size: 15px; color:#afafaf;">Sum verse# = <span style="color:#e2d031;    font-size: 15px;"> <?php echo $versesum;?></span></p>
+
+<?php } ?>
+</div><!--md-6-->
+        <div class="row">
+		  <div class="col-md-4">
+	
+<table  class="table table-striped" style="
+    width: 100%;
+"> 
+<thead style="
+    background-color: #FFA500;
+"> 
+
+<tr>
+ 
+   <!--<td>temp</td>-->
+  <td>Text</td>
+  
+  <td>Verse#</td>
+ 
+  <td>Verse</td>
+
+ 
+</tr>
+</thead>
+<tbody>
+
+
+<?php
+	
+	
+	
+$query = mysqli_query($conn, "SELECT * FROM `{$bibletable}` WHERE `gematriaverse` = '{$number}' AND `wordorder`=1");
+$rows = mysqli_num_rows($query);
+
+
+		while( $row = mysqli_fetch_array( $query)){
+			
+			
+			
+			
+			$verseno=$row['keyid'];
+			$book=$row['book'];
+$chapter=$row['chapter'];
+$versenumber=$row['verse'];
+$bookname=getbookname($conn,$book);
+
+if(($rows > 1) && ($duplicateword==="allow") ) { 
+$versesum=($versesum+$row['keyid'])*1;
+}
+
+
+
+				
+$textquery = mysqli_query($conn, "SELECT * FROM `strong_words` WHERE `keyid` = '{$verseno}' ORDER BY `orderid` ASC");
+			
+			$text="";
+	while( $textarray = mysqli_fetch_array( $textquery)){		
+ 
+ 
+$word=$textarray['words'];
+	
+$text=$text.$word." ";	
+	
+
+
+	 
+ }
+
+
+	
+	echo "<tr>";
+		
+	
+	
+	?>
+
+	
+
+   
+ <!--<td style="color:#00ff00;"><?php //echo $versesum ?></td>-->
+     <td style="color:#00ff00;"><?php echo $text; ?></td>
+
+	 <td style="color:#ffffff;"><a href="./interface.php?verse=<?php echo $verseno; ?>&systems=<?php echo $systems; ?>"target="_blank"><?php echo $verseno; ?></a></td>
+
+	
+	<td style="color:#ffffff;"><?php echo $bookname. " ".$chapter.":".$versenumber;?></td>
+
+
+   </tr>
+   
+
+<?php
+
+
+
+ }
+
+
+?>
+
+</tbody>
+</table>
+
+<?php if(($rows > 1) && ($duplicateword==="allow") ) { ?>
+<p style="text-align: center; margin-top: -8px;font-size: 15px; color:#afafaf;">Verses = <span style="color:#e2d031;    font-size: 15px;"> <?php echo $rows;?></span></p>
+<p style="text-align: center; margin-top: -8px;font-size: 15px; color:#afafaf;">Sum Verse# = <span style="color:#e2d031;    font-size: 15px;"> <?php echo $versesum;?></span></p>
+
+<?php } ?>
+</div><!--md-4-->
+
+</div><!--container-->
+</body>
+</html>
